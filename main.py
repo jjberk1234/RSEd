@@ -20,8 +20,8 @@ def index():
     if request.method == "GET":
         return render_template("index.html")
     elif request.method == "POST":
-        playlist_uri = request.form.get("playlist-url")
-        playlist_uri = playlist_uri.split("/")[-1].split("?")[0]
+        playlist_url = request.form.get("playlist-url")
+        playlist_uri = playlist_url.split("/")[-1].split("?")[0]
 
         tracks = sp.playlist_tracks(playlist_uri)["items"]
         return render_template("index.html", tracks=tracks)
