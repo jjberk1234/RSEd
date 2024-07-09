@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <form method="POST">
+       <textarea id="playlist-url" name="playlist-url" placeholder="Spotify Playlist URL" required></textarea> 
+       <br>
+       <br>
+       <input type="submit" value="Submit"></input>
+    </form>
+
+    {% for i in tracks %}
+        <p> {{ i["track"]["name"] }} </p>
+    {% endfor %}
+
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</body>
+</html>

@@ -1,5 +1,7 @@
-# venv stuff.
+# venv/flask stuff.
 RSEd/
+.cache
+__pycache__/
 
 # Spotify API key.
 secrets.json
