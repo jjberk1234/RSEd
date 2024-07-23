@@ -21,9 +21,13 @@ def index():
         return render_template("index.html")
     elif request.method == "POST":
         playlist_url = request.form.get("playlist-url")
-        playlist_uri = playlist_url.split("/")[-1].split("?")[0]
-
-        return redirect(url_for("module", uri=playlist_uri))
+        if validate_playlist_url(playlist_url):
+            if get_playlist_uri(playlist_url):
+                return redirect(url_for("module", uri=playlist_uri))
+            else:
+                return { "Invalid Spotify Plyalist url." }
+        else:
+            return { "Not a spotify url." }
 
 @app.route("/module/<uri>")
 def module(uri):

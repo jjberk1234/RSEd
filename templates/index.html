@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js" charset="utf-8"></script>
 </head>
 <body>
-    <form method="POST">
+    <form>
        <textarea id="playlist-url" name="playlist-url" placeholder="Spotify Playlist URL" required></textarea> 
        <br>
        <br>
@@ -15,10 +16,54 @@
         <p> {{ i["track"]["name"] }} </p>
     {% endfor %}
 
+    <div id="chart"></div>
+    <button onclick="randomize()">Randomize!</button>
+
     <style>
         body {
             text-align: center;
         }
     </style>
+
+    <script>
+        var xax = [1, 2 , 4];
+        var yax = [3, 8, 0];
+
+        var trace = {
+            type: "scatter",
+            x: xax,
+            y: yax,
+            mode: "markers",
+            marker: {
+                color: "rgb(0, 0, 0)",
+                symbol: "square"
+            }
+        };
+
+        var layout = {
+            plot_bgcolor: "#eee",
+            xaxis: { range: [0, 5] },
+            yaxis: { range: [0, 9] }
+        };
+
+        Plotly.newPlot("chart", [trace], layout);
+
+        function randomize()
+        {
+            Plotly.animate("chart", {
+                data: [{y: [Math.floor(Math.random() * 8), Math.floor(Math.random() * 8), Math.floor(Math.random() * 8)]}],
+                traces: [0],
+                layout: {}
+            }, {
+                transition: {
+                    duration: 500,
+                    easing: "cubic-in-out"
+                },
+                frame: {
+                    duration: 500
+                }
+            });
+        }
+    </script>
 </body>
 </html>
